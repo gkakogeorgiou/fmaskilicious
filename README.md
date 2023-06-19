@@ -37,3 +37,13 @@ The second argument is a glob pattern matching the granules to be processed (`*`
 The argument with `[]` are configures of Fmask, which are optional. The default values are 3, 3, 0, 22.5 respectively.
 
 Results are written to the folder mounted on `/mnt/output-dir` (one per granule).
+
+e.g.
+```bash
+$ docker run \
+-v /home/chiron/Documents/20230618/39RVM/RAW:/mnt/input-dir:ro \
+-v /home/chiron/Documents/20230618/39RVM/FMASK:/mnt/output-dir:rw \
+-it fmask \
+S2A_MSIL1C_20210512T071621_N0300_R006_T39RVM_20210512T094649 *T39RVM* 3 3 0 22.5
+```
+
