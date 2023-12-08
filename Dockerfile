@@ -2,7 +2,19 @@ FROM ubuntu:18.04
 
 LABEL maintainer.name="Jonas Sølvsteen" maintainer.email="josl@dhigroup.com"
 
-USER root
+RUN adduser fmask
+RUN usermod -aG root fmask
+
+ARG UID=1000
+ARG GID=1000
+RUN groupmod --gid $GID fmask
+RUN usermod --uid $UID fmask
+
+RUN apt-get update && \
+    apt-get -y install sudo wget unzip
+RUN echo 'fmask ALL=(ALL:ALL) NOPASSWD:ALL' >> /etc/sudoers
+RUN mkdir /mnt/output-dir
+RUN chmod 777 /mnt/output-dir
 
 RUN apt-get update && \
     apt-get install -y \
